@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 
 async function fetchComments(postId) {
   const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`);
@@ -25,6 +25,8 @@ export function PostDetail({ post }) {
     fetchComments(post.id)
   );
 
+  const deleteMutation = useMutation((postId) => deletePost(postId));
+  const updateMutation = useMutation((postId) => updatePost(postId));
   if (isLoading) {
     return <h3>Loading...</h3>;
   }
@@ -40,7 +42,17 @@ export function PostDetail({ post }) {
   return (
     <>
       <h3 style={{ color: "blue" }}>{post.title}</h3>
-      <button>Delete</button> <button>Update title</button>
+      <button onClick={() => deleteMutation.mutate(post.id)}>Delete</button>
+      {deleteMutation.isError && <p>Error deleting the post</p>}
+      {deleteMutation.isLoading && <p>Deleting the post</p>}
+      {deleteMutation.isSuccess && (
+        <p>Post has (not) been deleted. Because this API is fake API.</p>
+      )}
+      <button onClick={() => updateMutation.mutate(post.id)}>Update title</button>
+      {updateMutation.isError && <p>Error updating the post</p>}
+      {updateMutation.isLoading && <p>Updating the post</p>}
+      {updateMutation.isSuccess && <p>Post has (not) been updated</p>}
+
       <p>{post.body}</p>
       <h4>Comments</h4>
       {data.map((comment) => (
