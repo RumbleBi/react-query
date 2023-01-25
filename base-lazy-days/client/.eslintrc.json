@@ -31,6 +31,7 @@
     "@typescript-eslint",
     "simple-import-sort",
     "prettier"
+    // "simple-import-sort"
   ],
   "env": {
     "browser": true,
@@ -53,8 +54,8 @@
     "import/prefer-default-export": 0,
     "import/no-anonymous-default-export": 0,
     "import/no-unresolved": 2,
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error",
+    // "simple-import-sort/imports": "error",
+    // "simple-import-sort/exports": "error",
     "sort-imports": "off",
     "import/order": "off",
     "no-shadow": "off",
