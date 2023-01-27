@@ -51,6 +51,5 @@ export function getAvailableAppointments(
         !appointmentInPast(appointment),
     );
   });
-
   return filteredAppointments;
 }
