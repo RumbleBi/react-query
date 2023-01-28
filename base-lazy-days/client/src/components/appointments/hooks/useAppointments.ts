@@ -105,7 +105,7 @@ export function useAppointments(): UseAppointments {
       refetchOnMount: true,
       refetchOnReconnect: true,
       refetchOnWindowFocus: true,
-      refetchInterval: 1000, // refetchInterval 1sec you can see devtools at calendar
+      // refetchInterval: 1000, // refetchInterval 1sec you can see devtools at calendar
     },
   );
   /** ****************** END 3: useQuery  ******************************* */
