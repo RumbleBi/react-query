@@ -38,24 +38,27 @@ export function useUser(): UseUser {
     ({ signal }) => getUser(user, signal),
     {
       initialData: getStoredUser,
-      onSuccess: (received: User | null) => {
-        if (!received) {
-          clearStoredUser();
-        } else {
-          setStoredUser(received);
-        }
-      },
+      // onSuccess: (received: User | null) => {
+      //   if (!received) {
+      //     clearStoredUser();
+      //   } else {
+      //     setStoredUser(received);
+      //   }
+      // },
     },
   );
 
   // meant to be called from useAuth
   function updateUser(newUser: User): void {
     queryClient.setQueryData([queryKeys.user], newUser);
+    setStoredUser(newUser);
   }
 
   // meant to be called from useAuth
   function clearUser() {
     queryClient.setQueryData([queryKeys.user], null);
+    clearStoredUser();
+
     queryClient.removeQueries([queryKeys.appointments, queryKeys.user]);
   }
 
